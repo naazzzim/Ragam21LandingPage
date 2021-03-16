@@ -44,31 +44,40 @@
 
         scene.add( cube );
         camera.position.z=6;
-        let ambientLight=new THREE.AmbientLight(0xffffff,1.0);
-        scene.add(ambientLight);
-
+        
         //making ceiling and floor
         let topDownGeometry=new THREE.BoxGeometry(10,1,10);
         let topDownMaterial=
-            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/top-bottom.jpg'),side:THREE.DoubleSide});
+        new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/top-bottom.jpg'),side:THREE.DoubleSide});
         let ceilingCube= new THREE.Mesh(topDownGeometry,topDownMaterial);
         ceilingCube.position.y=5;
         let floorCube= new THREE.Mesh(topDownGeometry,topDownMaterial);
         floorCube.position.y=-5;
-
+        
         //making left and right walls
         let leftRightGeometry=new THREE.BoxGeometry(1,10,10);
         let leftRightMaterial=
-            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/wall.jpg'),side:THREE.DoubleSide});
+        new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/wall.jpg'),side:THREE.DoubleSide});
         let leftWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
         leftWall.position.x=-5;
         let rightWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
         rightWall.position.x=5;
-
+        
         scene.add(leftWall);
         scene.add(rightWall);
         scene.add(ceilingCube);
         scene.add(floorCube);
+        
+        let ambientLight=new THREE.AmbientLight(0xffffff,0.5);
+        scene.add(ambientLight);
+
+        let light1= new THREE.PointLight(0xff0040,3,50);
+        let light2= new THREE.PointLight(0x0040ff,1.5,50);
+        let light3= new THREE.PointLight(0x80ff80,3,50);
+        scene.add(light1);
+        scene.add(light2);
+        scene.add(light3);
+
 
         
 
@@ -76,6 +85,19 @@
         var update= ()=>{
             // cube.rotation.x+=0.01;
             // cube.rotation.y+=0.005;
+            var time = Date.now( ) *0.0005;
+
+            light1.position.x=Math.sin(time*0.7)*30;
+            light1.position.y=Math.cos(time*0.5)*40;
+            light1.position.z=Math.cos(time*0.3)*30;
+
+            light2.position.x=Math.cos(time*0.3)*30;
+            light2.position.y=Math.sin(time*0.5)*40;
+            light2.position.z=Math.sin(time*0.7)*30;
+
+            light3.position.x=Math.sin(time*0.7)*30;
+            light3.position.y=Math.cos(time*0.5)*40;
+            light3.position.z=Math.sin(time*0.3)*30;
         };
         //what we want to render
         var render=()=>{
