@@ -78,8 +78,10 @@
         // scene.add(light2);
         // scene.add(light3);
         let directionalLight = new THREE.DirectionalLight(0xffffff,1);
-        scene.add(directionalLight);
-
+        // scene.add(directionalLight);
+        let spotLight= new THREE.SpotLight(0xff45f6,25);
+        spotLight.position.set(0,3,0);
+        scene.add(spotLight);
 
         
 
