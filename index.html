@@ -26,22 +26,51 @@
 
         controls = new THREE.OrbitControls(camera,renderer.domElement);
 
-        const geometry = new THREE.BoxGeometry( 5, 5, 5 );//create shape
+        const geometry = new THREE.BoxGeometry( 2, 2, 2 );//create shape
         //design for each side given below
+        //Materials can be MeshLambertMaterial, MeshphongMaterial, MeshBasicMaterial, MeshBlinnMaterial
         let cubeMaterials=[
-            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/1.jpg'),side:THREE.DoubleSide}),//right side
-            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/2.jpg'),side:THREE.DoubleSide}),//left side
-            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/3.jpg'),side:THREE.DoubleSide}),//top side
-            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/4.jpg'),side:THREE.DoubleSide}),//bottom side
-            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/5.jpg'),side:THREE.DoubleSide}),//front side
-            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/6.jpg'),side:THREE.DoubleSide}),//back side
+            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/1.jpg'),side:THREE.DoubleSide}),//right side
+            new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/2.jpg'),side:THREE.DoubleSide}),//left side
+            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/3.jpg'),side:THREE.DoubleSide}),//top side
+            new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/4.jpg'),side:THREE.DoubleSide}),//bottom side
+            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/5.jpg'),side:THREE.DoubleSide}),//front side
+            new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/6.jpg'),side:THREE.DoubleSide}),//back side
         ];
+        //MeshBasicMaterial does not depend on lighting
         //MeshFaceMaterial used instead of mesh material
         const material = new THREE.MeshFaceMaterial(cubeMaterials);//give material and colour
         const cube = new THREE.Mesh( geometry, material );
 
         scene.add( cube );
         camera.position.z=6;
+        let ambientLight=new THREE.AmbientLight(0xffffff,1.0);
+        scene.add(ambientLight);
+
+        //making ceiling and floor
+        let topDownGeometry=new THREE.BoxGeometry(10,1,10);
+        let topDownMaterial=
+            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/top-bottom.jpg'),side:THREE.DoubleSide});
+        let ceilingCube= new THREE.Mesh(topDownGeometry,topDownMaterial);
+        ceilingCube.position.y=5;
+        let floorCube= new THREE.Mesh(topDownGeometry,topDownMaterial);
+        floorCube.position.y=-5;
+
+        //making left and right walls
+        let leftRightGeometry=new THREE.BoxGeometry(1,10,10);
+        let leftRightMaterial=
+            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/wall.jpg'),side:THREE.DoubleSide});
+        let leftWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
+        leftWall.position.x=-5;
+        let rightWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
+        rightWall.position.x=5;
+
+        scene.add(leftWall);
+        scene.add(rightWall);
+        scene.add(ceilingCube);
+        scene.add(floorCube);
+
+        
 
         //game logic
         var update= ()=>{
