@@ -26,8 +26,18 @@
 
         controls = new THREE.OrbitControls(camera,renderer.domElement);
 
-        const geometry = new THREE.BoxGeometry( 1, 1, 1 );//create shape
-        const material = new THREE.MeshBasicMaterial( {color: 0xffffff,wireframe:true} );//give material and colour
+        const geometry = new THREE.BoxGeometry( 5, 5, 5 );//create shape
+        //design for each side given below
+        let cubeMaterials=[
+            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/1.jpg'),side:THREE.DoubleSide}),//right side
+            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/2.jpg'),side:THREE.DoubleSide}),//left side
+            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/3.jpg'),side:THREE.DoubleSide}),//top side
+            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/4.jpg'),side:THREE.DoubleSide}),//bottom side
+            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/5.jpg'),side:THREE.DoubleSide}),//front side
+            new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load('img/6.jpg'),side:THREE.DoubleSide}),//back side
+        ];
+        //MeshFaceMaterial used instead of mesh material
+        const material = new THREE.MeshFaceMaterial(cubeMaterials);//give material and colour
         const cube = new THREE.Mesh( geometry, material );
 
         scene.add( cube );
