@@ -10,6 +10,8 @@
 <body>
     <script src="js/three.js"></script>
     <script src="js/OrbitControls.js"></script>
+    <script src="js/MTLLoader.js"></script>
+    <script src="js/OBJLoader.js"></script>
     <script>
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,1000);
@@ -27,6 +29,7 @@
         controls = new THREE.OrbitControls(camera,renderer.domElement);
 
         const geometry = new THREE.BoxGeometry( 2, 2, 2 );//create shape
+        // geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0,3,0));
         //design for each side given below
         //Materials can be MeshLambertMaterial, MeshphongMaterial, MeshBasicMaterial, MeshBlinnMaterial
         let cubeMaterials=[
@@ -43,7 +46,8 @@
         const cube = new THREE.Mesh( geometry, material );
 
         // scene.add( cube );
-        camera.position.z=6;
+
+        camera.position.z=4;
         
         //making ceiling and floor
         let topDownGeometry=new THREE.BoxGeometry(10,1,10);
@@ -63,10 +67,10 @@
         let rightWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
         rightWall.position.x=5;
         
-        scene.add(leftWall);
-        scene.add(rightWall);
-        scene.add(ceilingCube);
-        scene.add(floorCube);
+        // scene.add(leftWall);
+        // scene.add(rightWall);
+        // scene.add(ceilingCube);
+        // scene.add(floorCube);
         
         let ambientLight=new THREE.AmbientLight(0xffffff,0.5);
         scene.add(ambientLight);
@@ -86,29 +90,43 @@
         let sphereMaterial=new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/sky.jpg'),side:THREE.BackSide})
         let sky=new THREE.Mesh(skyGeo,sphereMaterial);
         scene.add(sky);
+        let modelMaterial,modelGeometry;
+        const mtlloader = new THREE.MTLLoader();
+        mtlloader.setPath('/models/');
+        mtlloader.load('aaaaaaaaaaaaaaa.mtl',function(materials){
+            materials.preload();
+            const objloader = new THREE.OBJLoader();
+            objloader.setPath('/models/');
+            const mtl= new THREE.MeshBasicMaterial({color:0xffffff});
+            objloader.setMaterials(materials);
+            objloader.load('aaaaaaaaaaaaaaa.obj',function(object){
+                // object.material= new THREE.MeshBasicMaterial({color:0xffffff});
+                scene.add(object);
+            });
+        })
         
-        
+
         
 
         //game logic
         var update= ()=>{
             // cube.rotation.x+=0.01;
-            // cube.rotation.y+=0.005;
+            // cube.rotation.x+=0.005;
             sky.rotation.y+=0.0005;
             sky.rotation.x+=0.0005;
-            var time = Date.now( ) *0.0005;
+            // var time = Date.now( ) *0.0005;
 
-            light1.position.x=Math.sin(time*0.7)*30;
-            light1.position.y=Math.cos(time*0.5)*40;
-            light1.position.z=Math.cos(time*0.3)*30;
+            // light1.position.x=Math.sin(time*0.7)*30;
+            // light1.position.y=Math.cos(time*0.5)*40;
+            // light1.position.z=Math.cos(time*0.3)*30;
 
-            light2.position.x=Math.cos(time*0.3)*30;
-            light2.position.y=Math.sin(time*0.5)*40;
-            light2.position.z=Math.sin(time*0.7)*30;
+            // light2.position.x=Math.cos(time*0.3)*30;
+            // light2.position.y=Math.sin(time*0.5)*40;
+            // light2.position.z=Math.sin(time*0.7)*30;
 
-            light3.position.x=Math.sin(time*0.7)*30;
-            light3.position.y=Math.cos(time*0.5)*40;
-            light3.position.z=Math.sin(time*0.3)*30;
+            // light3.position.x=Math.sin(time*0.7)*30;
+            // light3.position.y=Math.cos(time*0.5)*40;
+            // light3.position.z=Math.sin(time*0.3)*30;
         };
         //what we want to render
         var render=()=>{
