@@ -51,7 +51,24 @@
         
 
         let COLORS = [ 0x69D2E7, 0xA7DBD8, 0xE0E4CC, 0xF38630, 0xFA6900, 0xFF4E50, 0xF9D423 ],spheres = [],geometry,material,mesh,a,b,c;
-
+        
+        let model;
+        let modelMaterial,modelGeometry;
+        const mtlloader = new THREE.MTLLoader();
+        mtlloader.setPath('/threejs-tut-and-test/models/');
+        mtlloader.load('logo.mtl',function(materials){
+            materials.preload();
+            const objloader = new THREE.OBJLoader();
+            objloader.setPath('/threejs-tut-and-test/models/');
+            const mtl= new THREE.MeshBasicMaterial({color:0xffffff});
+            objloader.setMaterials(materials);
+            objloader.load('logo.obj',function(object){
+                // object.material= new THREE.MeshBasicMaterial({color:0xffffff});
+                model=object;
+                object.scale.set(100,100,100);
+                scene.add(object);
+            });
+        })
         for(let i=0;i<70;i++)
         {
         
@@ -92,7 +109,7 @@
         
         let ambientLight=new THREE.AmbientLight(0xffffff,1);
         scene.add(ambientLight);
-
+        
         // let light1= new THREE.PointLight(0xff0040,3,50);
         // let light2= new THREE.PointLight(0x0040ff,1.5,50);
         // let light3= new THREE.PointLight(0x80ff80,3,50);
@@ -108,23 +125,6 @@
         // let sphereMaterial=new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/sky.jpg'),side:THREE.BackSide})
         // let sky=new THREE.Mesh(skyGeo,sphereMaterial);
         // scene.add(sky);
-        let model;
-        let modelMaterial,modelGeometry;
-        const mtlloader = new THREE.MTLLoader();
-        mtlloader.setPath('/threejs-tut-and-test/models/');
-        mtlloader.load('logo.mtl',function(materials){
-            materials.preload();
-            const objloader = new THREE.OBJLoader();
-            objloader.setPath('/threejs-tut-and-test/models/');
-            const mtl= new THREE.MeshBasicMaterial({color:0xffffff});
-            objloader.setMaterials(materials);
-            objloader.load('logo.obj',function(object){
-                // object.material= new THREE.MeshBasicMaterial({color:0xffffff});
-                model=object;
-                object.scale.set(100,100,100);
-                scene.add(object);
-            });
-        })
         
 
         
