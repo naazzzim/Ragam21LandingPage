@@ -47,8 +47,26 @@
 
         // scene.add( cube );
 
-        camera.position.z=2;
+        camera.position.z=20;
         
+
+        let COLORS = [ 0x69D2E7, 0xA7DBD8, 0xE0E4CC, 0xF38630, 0xFA6900, 0xFF4E50, 0xF9D423 ],spheres = [],geometry,material,mesh,a,b,c;
+
+        for(let i=0;i<70;i++)
+        {
+        
+            geometry = new THREE.SphereGeometry( Math.random()*0.3, 10, 10 );
+            material = new THREE.MeshBasicMaterial( { color: COLORS[i%7] } );
+            geometry.applyMatrix4( new THREE.Matrix4().makeTranslation( Math.random()*100-50,Math.random()*100-50,Math.random()*100-50) );
+
+      mesh = new THREE.Mesh( geometry, material);
+      mesh.rotation.x = Math.random()*100;
+      mesh.rotation.y = Math.random()*100;
+      mesh.rotation.z = Math.random()*100;
+      scene.add( mesh );
+      spheres.push( mesh );
+        }
+
         //making ceiling and floor
         // let topDownGeometry=new THREE.BoxGeometry(10,1,10);
         // let topDownMaterial=
@@ -93,16 +111,17 @@
         let model;
         let modelMaterial,modelGeometry;
         const mtlloader = new THREE.MTLLoader();
-        mtlloader.setPath('/threejs-tut-and-test/models/');
+        mtlloader.setPath('/models/');
         mtlloader.load('logo.mtl',function(materials){
             materials.preload();
             const objloader = new THREE.OBJLoader();
-            objloader.setPath('/threejs-tut-and-test/models/');
+            objloader.setPath('/models/');
             const mtl= new THREE.MeshBasicMaterial({color:0xffffff});
             objloader.setMaterials(materials);
             objloader.load('logo.obj',function(object){
                 // object.material= new THREE.MeshBasicMaterial({color:0xffffff});
                 model=object;
+                object.scale.set(100,100,100);
                 scene.add(object);
             });
         })
@@ -112,6 +131,10 @@
 
         //game logic
         var update= ()=>{
+            for (var i = 0; i < spheres.length; i++) {
+                spheres[i].rotation.z += 0.003;
+                spheres[i].rotation.x += 0.003;
+                spheres[i].rotation.y += 0.003;}
             // model.rotation.y+=0.01;
             // cube.rotation.x+=0.01;
             // cube.rotation.x+=0.005;
