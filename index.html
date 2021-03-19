@@ -111,11 +111,11 @@
         let model;
         let modelMaterial,modelGeometry;
         const mtlloader = new THREE.MTLLoader();
-        mtlloader.setPath('/models/');
+        mtlloader.setPath('/threejs-tut-and-test/models/');
         mtlloader.load('logo.mtl',function(materials){
             materials.preload();
             const objloader = new THREE.OBJLoader();
-            objloader.setPath('/models/');
+            objloader.setPath('/threejs-tut-and-test/models/');
             const mtl= new THREE.MeshBasicMaterial({color:0xffffff});
             objloader.setMaterials(materials);
             objloader.load('logo.obj',function(object){
