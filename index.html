@@ -145,10 +145,11 @@
         
 
         //game logic
-        var update= ()=>{
+        var update1= ()=>{
             for (var i = 0; i < spheres.length; i++) {
                 // spheres[i].rotation.z += 0.012;
                 spheres[i].rotation.x += 0.007;}
+                controls.update();
                 // spheres[i].rotation.y += 0.007;
             // model.rotation.y+=0.01;
             // cube.rotation.x+=0.01;
@@ -176,7 +177,7 @@
         //game loop (event loop for game),(update, render, repeat)
         var GameLoop=()=>{
             requestAnimationFrame(GameLoop); //run every single frame
-            update();
+            update1();
             render();
         };
 
