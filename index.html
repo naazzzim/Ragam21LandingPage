@@ -89,7 +89,7 @@
         let skyGeo = new THREE.SphereGeometry(50, 25, 25); 
         let sphereMaterial=new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/sky.jpg'),side:THREE.BackSide})
         let sky=new THREE.Mesh(skyGeo,sphereMaterial);
-        scene.add(sky);
+        // scene.add(sky);
         let model;
         let modelMaterial,modelGeometry;
         const mtlloader = new THREE.MTLLoader();
