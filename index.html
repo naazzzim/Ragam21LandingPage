@@ -28,44 +28,62 @@
 
         controls = new THREE.OrbitControls(camera,renderer.domElement);
 
-        const geometry = new THREE.BoxGeometry( 2, 2, 2 );//create shape
+        // const geometry = new THREE.BoxGeometry( 2, 2, 2 );//create shape
         // geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0,3,0));
         //design for each side given below
         //Materials can be MeshLambertMaterial, MeshphongMaterial, MeshBasicMaterial, MeshBlinnMaterial
-        let cubeMaterials=[
-            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/1.jpg'),side:THREE.DoubleSide}),//right side
-            new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/2.jpg'),side:THREE.DoubleSide}),//left side
-            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/3.jpg'),side:THREE.DoubleSide}),//top side
-            new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/4.jpg'),side:THREE.DoubleSide}),//bottom side
-            new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/5.jpg'),side:THREE.DoubleSide}),//front side
-            new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/6.jpg'),side:THREE.DoubleSide}),//back side
-        ];
+        // let cubeMaterials=[
+        //     new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/1.jpg'),side:THREE.DoubleSide}),//right side
+        //     new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/2.jpg'),side:THREE.DoubleSide}),//left side
+        //     new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/3.jpg'),side:THREE.DoubleSide}),//top side
+        //     new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/4.jpg'),side:THREE.DoubleSide}),//bottom side
+        //     new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/5.jpg'),side:THREE.DoubleSide}),//front side
+        //     new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/6.jpg'),side:THREE.DoubleSide}),//back side
+        // ];
         //MeshBasicMaterial does not depend on lighting
         //MeshFaceMaterial used instead of mesh material
-        const material = new THREE.MeshFaceMaterial(cubeMaterials);//give material and colour
-        const cube = new THREE.Mesh( geometry, material );
+        // const material = new THREE.MeshFaceMaterial(cubeMaterials);//give material and colour
+        // const cube = new THREE.Mesh( geometry, material );
 
         // scene.add( cube );
 
-        camera.position.z=4;
+        camera.position.z=20;
         
+
+        let COLORS = [ 0x69D2E7, 0xA7DBD8, 0xE0E4CC, 0xF38630, 0xFA6900, 0xFF4E50, 0xF9D423 ],spheres = [],geometry,material,mesh,a,b,c;
+
+        for(let i=0;i<70;i++)
+        {
+        
+            geometry = new THREE.SphereGeometry( Math.random()*0.3, 10, 10 );
+            material = new THREE.MeshBasicMaterial( { color: COLORS[i%7] } );
+            geometry.applyMatrix4( new THREE.Matrix4().makeTranslation( Math.random()*100-50,Math.random()*100-50,Math.random()*100-50) );
+
+      mesh = new THREE.Mesh( geometry, material);
+      mesh.rotation.x = Math.random()*100;
+      mesh.rotation.y = Math.random()*100;
+      mesh.rotation.z = Math.random()*100;
+      scene.add( mesh );
+      spheres.push( mesh );
+        }
+
         //making ceiling and floor
-        let topDownGeometry=new THREE.BoxGeometry(10,1,10);
-        let topDownMaterial=
-        new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/top-bottom.jpg'),side:THREE.DoubleSide});
-        let ceilingCube= new THREE.Mesh(topDownGeometry,topDownMaterial);
-        ceilingCube.position.y=5;
-        let floorCube= new THREE.Mesh(topDownGeometry,topDownMaterial);
-        floorCube.position.y=-5;
+        // let topDownGeometry=new THREE.BoxGeometry(10,1,10);
+        // let topDownMaterial=
+        // new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/top-bottom.jpg'),side:THREE.DoubleSide});
+        // let ceilingCube= new THREE.Mesh(topDownGeometry,topDownMaterial);
+        // ceilingCube.position.y=5;
+        // let floorCube= new THREE.Mesh(topDownGeometry,topDownMaterial);
+        // floorCube.position.y=-5;
         
-        //making left and right walls
-        let leftRightGeometry=new THREE.BoxGeometry(1,10,10);
-        let leftRightMaterial=
-        new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/wall.jpg'),side:THREE.DoubleSide});
-        let leftWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
-        leftWall.position.x=-5;
-        let rightWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
-        rightWall.position.x=5;
+        // //making left and right walls
+        // let leftRightGeometry=new THREE.BoxGeometry(1,10,10);
+        // let leftRightMaterial=
+        // new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/wall.jpg'),side:THREE.DoubleSide});
+        // let leftWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
+        // leftWall.position.x=-5;
+        // let rightWall= new THREE.Mesh(leftRightGeometry,leftRightMaterial);
+        // rightWall.position.x=5;
         
         // scene.add(leftWall);
         // scene.add(rightWall);
@@ -75,20 +93,20 @@
         let ambientLight=new THREE.AmbientLight(0xffffff,1);
         scene.add(ambientLight);
 
-        let light1= new THREE.PointLight(0xff0040,3,50);
-        let light2= new THREE.PointLight(0x0040ff,1.5,50);
-        let light3= new THREE.PointLight(0x80ff80,3,50);
+        // let light1= new THREE.PointLight(0xff0040,3,50);
+        // let light2= new THREE.PointLight(0x0040ff,1.5,50);
+        // let light3= new THREE.PointLight(0x80ff80,3,50);
         // scene.add(light1);
         // scene.add(light2);
         // scene.add(light3);
-        let directionalLight = new THREE.DirectionalLight(0xffffff,1);
-        // scene.add(directionalLight);
-        let spotLight= new THREE.SpotLight(0xff45f6,25);
-        spotLight.position.set(0,3,0);
-        // scene.add(spotLight);
-        let skyGeo = new THREE.SphereGeometry(50, 25, 25); 
-        let sphereMaterial=new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/sky.jpg'),side:THREE.BackSide})
-        let sky=new THREE.Mesh(skyGeo,sphereMaterial);
+        // let directionalLight = new THREE.DirectionalLight(0xffffff,1);
+        // // scene.add(directionalLight);
+        // let spotLight= new THREE.SpotLight(0xff45f6,25);
+        // spotLight.position.set(0,3,0);
+        // // scene.add(spotLight);
+        // let skyGeo = new THREE.SphereGeometry(50, 25, 25); 
+        // let sphereMaterial=new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/sky.jpg'),side:THREE.BackSide})
+        // let sky=new THREE.Mesh(skyGeo,sphereMaterial);
         // scene.add(sky);
         let model;
         let modelMaterial,modelGeometry;
@@ -103,6 +121,7 @@
             objloader.load('logo.obj',function(object){
                 // object.material= new THREE.MeshBasicMaterial({color:0xffffff});
                 model=object;
+                object.scale.set(100,100,100);
                 scene.add(object);
             });
         })
@@ -112,11 +131,15 @@
 
         //game logic
         var update= ()=>{
+            for (var i = 0; i < spheres.length; i++) {
+                spheres[i].rotation.z += 0.003;
+                spheres[i].rotation.x += 0.003;
+                spheres[i].rotation.y += 0.003;}
             // model.rotation.y+=0.01;
             // cube.rotation.x+=0.01;
             // cube.rotation.x+=0.005;
-            sky.rotation.y+=0.0005;
-            sky.rotation.x+=0.0005;
+            // sky.rotation.y+=0.0005;
+            // sky.rotation.x+=0.0005;
             // var time = Date.now( ) *0.0005;
 
             // light1.position.x=Math.sin(time*0.7)*30;
