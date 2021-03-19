@@ -9,7 +9,8 @@
 </head>
 <body>
     <script src="js/three.js"></script>
-    <script src="js/OrbitControls.js"></script>
+    <!-- <script src="js/OrbitControls.js"></script> -->
+    <script src="js/DeviceOrientationControls.js"></script>
     <script src="js/MTLLoader.js"></script>
     <script src="js/OBJLoader.js"></script>
     <script>
@@ -29,7 +30,7 @@
             camera.updateProjectionMatrix();
         });
 
-        controls = new THREE.OrbitControls(camera,renderer.domElement);
+        controls = new THREE.DeviceOrientationControls(camera);
 
         // const geometry = new THREE.BoxGeometry( 2, 2, 2 );//create shape
         // geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0,3,0));
