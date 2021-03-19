@@ -17,7 +17,10 @@
         var camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,1000);
         var renderer=new THREE.WebGLRenderer();
         renderer.setSize(window.innerWidth,window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         document.body.appendChild(renderer.domElement);
+
         window.addEventListener('resize',()=>{
             let height= window.innerHeight;
             let width=window.innerWidth;
@@ -110,14 +113,25 @@
         let ambientLight=new THREE.AmbientLight(0xffffff,1);
         scene.add(ambientLight);
         
-        // let light1= new THREE.PointLight(0xff0040,3,50);
-        // let light2= new THREE.PointLight(0x0040ff,1.5,50);
+        let light1= new THREE.PointLight(0xff0040,2,100);
+        light1.position.set(-40,80,20);
+
+        let light2= new THREE.PointLight(0xffffff,2,100);
+        light2.position.set(40,80,20);
         // let light3= new THREE.PointLight(0x80ff80,3,50);
         // scene.add(light1);
         // scene.add(light2);
         // scene.add(light3);
-        // let directionalLight = new THREE.DirectionalLight(0xffffff,1);
-        // // scene.add(directionalLight);
+        let directionalLight = new THREE.DirectionalLight(0xffccdd,0.02);
+        directionalLight.position.set(0,3,50);
+        let directionalLight1 = new THREE.DirectionalLight(0xffccdd,0.02);
+        directionalLight1.position.set(20,2.5,50);
+        let directionalLight2 = new THREE.DirectionalLight(0xffccdd,0.02);
+        directionalLight2.position.set(-20,2.5,50);
+
+        scene.add(directionalLight);
+        scene.add(directionalLight1);
+        scene.add(directionalLight2);
         // let spotLight= new THREE.SpotLight(0xff45f6,25);
         // spotLight.position.set(0,3,0);
         // // scene.add(spotLight);
