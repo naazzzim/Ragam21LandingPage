@@ -53,34 +53,34 @@
         camera.position.z=20;
         
 
-        let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500 ],spheres = [],geometry,material,mesh,a,b,c;
+        let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500,0x948566,0xffdc91 ],spheres = [],geometry,material,mesh,a,b,c;
         
         let model;
         let modelMaterial,modelGeometry;
         const mtlloader = new THREE.MTLLoader();
         mtlloader.setPath('/threejs-tut-and-test/models/');
-        mtlloader.load('logo.mtl',function(materials){
+        mtlloader.load('b.mtl',function(materials){
             materials.preload();
             const objloader = new THREE.OBJLoader();
             objloader.setPath('/threejs-tut-and-test/models/');
             const mtl= new THREE.MeshBasicMaterial({color:0xffffff});
             objloader.setMaterials(materials);
-            objloader.load('logo.obj',function(object){
+            objloader.load('b.obj',function(object){
                 // object.material= new THREE.MeshBasicMaterial({color:0xffffff});
                 model=object;
                 object.scale.set(60,60,60);
                 scene.add(object);
             });
         })
-        for(let i=0;i<70;i++)
+        for(let i=0;i<150;i++)
         {
         
-            geometry = new THREE.SphereGeometry( Math.random()*0.5, 10, 10 );
-            material = new THREE.MeshBasicMaterial( { color: COLORS[i%7] } );
+            geometry = new THREE.SphereGeometry( Math.random()*0.4, 10, 10 );
+            material = new THREE.MeshBasicMaterial( { color: COLORS[i%9] } );
             geometry.applyMatrix4( new THREE.Matrix4().makeTranslation( Math.random()*50+25,Math.random()*50+25,Math.random()*50+25) );
 
       mesh = new THREE.Mesh( geometry, material);
-      mesh.rotation.x = Math.random()*100;
+    //   mesh.rotation.x = Math.random()*100;
       mesh.rotation.y = Math.random()*100;
       mesh.rotation.z = Math.random()*100;
       scene.add( mesh );
@@ -110,23 +110,23 @@
         // scene.add(ceilingCube);
         // scene.add(floorCube);
         
-        let ambientLight=new THREE.AmbientLight(0xffffff,1);
+        let ambientLight=new THREE.AmbientLight(0xccccff,0.7);
         scene.add(ambientLight);
         
-        let light1= new THREE.PointLight(0xff0040,2,100);
-        light1.position.set(-40,80,20);
+        // let light1= new THREE.PointLight(0xff0040,2,100);
+        // light1.position.set(-40,80,20);
 
-        let light2= new THREE.PointLight(0xffffff,2,100);
-        light2.position.set(40,80,20);
+        // let light2= new THREE.PointLight(0xffffff,2,100);
+        // light2.position.set(40,80,20);
         // let light3= new THREE.PointLight(0x80ff80,3,50);
         // scene.add(light1);
         // scene.add(light2);
         // scene.add(light3);
-        let directionalLight = new THREE.DirectionalLight(0xffccdd,0.02);
+        let directionalLight = new THREE.DirectionalLight(0xccccff,0.01);
         directionalLight.position.set(0,3,50);
-        let directionalLight1 = new THREE.DirectionalLight(0xffccdd,0.02);
+        let directionalLight1 = new THREE.DirectionalLight(0xccccff,0.022);
         directionalLight1.position.set(20,2.5,50);
-        let directionalLight2 = new THREE.DirectionalLight(0xffccdd,0.02);
+        let directionalLight2 = new THREE.DirectionalLight(0xccccff,0.022);
         directionalLight2.position.set(-20,2.5,50);
 
         scene.add(directionalLight);
@@ -147,8 +147,8 @@
         var update= ()=>{
             for (var i = 0; i < spheres.length; i++) {
                 // spheres[i].rotation.z += 0.012;
-                // spheres[i].rotation.x += 0.012;
-                spheres[i].rotation.y += 0.01;}
+                spheres[i].rotation.x += 0.007;}
+                // spheres[i].rotation.y += 0.007;
             // model.rotation.y+=0.01;
             // cube.rotation.x+=0.01;
             // cube.rotation.x+=0.005;
