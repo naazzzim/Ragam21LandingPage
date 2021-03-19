@@ -9,10 +9,10 @@
 </head>
 <body>
     <script src="js/three.js"></script>
-    <!-- <script src="js/OrbitControls.js"></script> -->
-    <script src="js/DeviceOrientationControls.js"></script>
+    <script src="js/OrbitControls.js"></script>
     <script src="js/MTLLoader.js"></script>
     <script src="js/OBJLoader.js"></script>
+    <script src="js/DeviceOrientationControls.js"></script>
     <script>
         var scene = new THREE.Scene();
         var camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,1000);
@@ -59,11 +59,11 @@
         let model;
         let modelMaterial,modelGeometry;
         const mtlloader = new THREE.MTLLoader();
-        mtlloader.setPath('/threejs-tut-and-test/models/');
+        mtlloader.setPath('/models/');
         mtlloader.load('b.mtl',function(materials){
             materials.preload();
             const objloader = new THREE.OBJLoader();
-            objloader.setPath('/threejs-tut-and-test/models/');
+            objloader.setPath('/models/');
             const mtl= new THREE.MeshBasicMaterial({color:0xffffff});
             objloader.setMaterials(materials);
             objloader.load('b.obj',function(object){
