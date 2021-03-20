@@ -53,7 +53,7 @@
             camera.position.z=0;
             
             
-            let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500,0x948566,0xffdc91 ],spheres = [],geometry,material,model;
+            let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500,0x948566,0xffdc91 ],spheres = [],geometry,material,model,flag=0;
             
 
             
@@ -160,7 +160,11 @@
                 for (var i = 0; i < spheres.length; i++) {
                     // spheres[i].rotation.z += 0.012;
                     spheres[i].rotation.x += 0.007;}
+                    if(model!=undefined&&flag==1){
 
+                        controls.update();
+                    }
+                    
                     // spheres[i].rotation.y += 0.007;
                     // model.rotation.y+=0.01;
                     // cube.rotation.x+=0.01;
@@ -188,9 +192,9 @@
                 //game loop (event loop for game),(update, render, repeat)
                 var GameLoop=()=>{
                     requestAnimationFrame(GameLoop); //run every single frame
-                    if(model!=undefined){
+                    if(model!=undefined&&flag==0){
                         controls = new THREE.DeviceOrientationControls(model);
-                        controls.update();
+                        flag=1;
                     }
                     update1();
                     render();
