@@ -30,14 +30,19 @@
             camera.updateProjectionMatrix();
         });
         
-        let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500,0x948566,0xffdc91 ],spheres = [],geometry,material,model,flag=0,flag1=0;
+        let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500,0x948566,0xffdc91 ],spheres = [],geometry,material,model,flag=0;
         window.addEventListener('deviceorientation',(event)=>{
-            if(!event.absolute)
-                flag1=0;
-            else
-                flag1=1;
             if(model!=undefined&&flag==1&&event.alpha){
-                controls.update();
+                if((event.alpha>310&&event.alpha<360)||(event.alpha>0&&event.alpha<50)){
+                    if(event.beta>60&&event.beta<120)
+                    {
+                        if(event.gamma>-30&&event.gamma<40)
+                        {
+                            controls.update();
+                        }
+                    }
+                }
+
                 console.log(event.alpha+"<- alpha"+event.beta+"<-beta"+event.gamma+"<-gamma");
                 }
         } );
