@@ -42,14 +42,12 @@
                 window.removeEventListener("deviceorientation",callback);
             else
             {
-                camera.position.set(0,0,0);
                 console.log("set camera position")
             }
         };
         window.addEventListener("deviceorientation",callback);
-        camera.position.z=10;
         
-        const cubegeometry = new THREE.BoxGeometry( 50, 50, 50 );//create shape
+        const cubegeometry = new THREE.BoxGeometry( 80, 80, 80 );//create shape
         // geometry.applyMatrix4(new THREE.Matrix4().makeTranslation(0,3,0));
         //design for each side given below
         //Materials can be MeshLambertMaterial, MeshphongMaterial, MeshBasicMaterial, MeshBlinnMaterial
