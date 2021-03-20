@@ -29,6 +29,18 @@
             camera.aspect=width/height;
             camera.updateProjectionMatrix();
         });
+        
+        let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500,0x948566,0xffdc91 ],spheres = [],geometry,material,model,flag=0,flag1=0;
+        window.addEventListener('deviceorientation',(event)=>{
+            if(!event.absolute)
+                flag1=0;
+            else
+                flag1=1;
+            console.log(event.alpha);
+            console.log(event.beta);
+            console.log(event.alpha);
+            console.log(event.alpha);
+        } );
 
         
         // const geometry = new THREE.BoxGeometry( 2, 2, 2 );//create shape
@@ -53,7 +65,6 @@
             camera.position.z=0;
             
             
-            let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500,0x948566,0xffdc91 ],spheres = [],geometry,material,model,flag=0;
             
 
             
@@ -76,7 +87,6 @@
                     scene.add(model);
                 });
             })
-            console.log();
             for(let i=0;i<300;i++)
             {
                 
@@ -160,8 +170,7 @@
                 for (var i = 0; i < spheres.length; i++) {
                     // spheres[i].rotation.z += 0.012;
                     spheres[i].rotation.x += 0.007;}
-                    if(model!=undefined&&flag==1){
-
+                    if(model!=undefined&&flag==1&&flag1==1){
                         controls.update();
                     }
                     
@@ -193,7 +202,9 @@
                 var GameLoop=()=>{
                     requestAnimationFrame(GameLoop); //run every single frame
                     if(model!=undefined&&flag==0){
+                        console.log(model.position);
                         controls = new THREE.DeviceOrientationControls(model);
+                        model.rotation.set(0,0,0);
                         flag=1;
                     }
                     update1();
