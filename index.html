@@ -33,6 +33,8 @@
         let COLORS = [ 0xfcd600, 0xfc8600, 0xfc9700, 0xfca000, 0xfca800, 0xfcb900, 0xfcc500,0x948566,0xffdc91 ],spheres = [],geometry,material,model,flag=0;
         window.addEventListener('deviceorientation',(event)=>{
             if(model!=undefined&&flag==1&&event.alpha){
+                if(event.gamma>-30&&event.gamma<40)
+                {
                 if(event.beta>50&&event.beta<130)
                 {
                     if((event.alpha>330&&event.alpha<=360)||(event.alpha>=0&&event.alpha<30)){
@@ -41,8 +43,9 @@
                     }
                 }
 
+                console.log(event.alpha+"<- alpha"+event.beta+"<-beta"+event.gamma+"<-gamma");
                 }
-        );
+        } );
 
         
         // const geometry = new THREE.BoxGeometry( 2, 2, 2 );//create shape
