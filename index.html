@@ -61,11 +61,11 @@
             
             let modelMaterial,modelGeometry;
             const mtlloader = new THREE.MTLLoader();
-            mtlloader.setPath('/threejs-tut-and-test/models/');
+            mtlloader.setPath('/models/');
             mtlloader.load('b.mtl',function(materials){
                 materials.preload();
                 const objloader = new THREE.OBJLoader();
-                objloader.setPath('/threejs-tut-and-test/models/');
+                objloader.setPath('/models/');
                 const mtl= new THREE.MeshBasicMaterial({color:0xffffff});
                 objloader.setMaterials(materials);
                 objloader.load('b.obj',function(object){
@@ -181,6 +181,7 @@
             if(!flag)
             {
                 camera.rotation.set(0,0,0);
+                flag=1;
             }
             requestAnimationFrame(GameLoop); //run every single frame
             update1();
