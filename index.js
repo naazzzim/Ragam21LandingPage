@@ -148,7 +148,6 @@ let funct=()=>{
 
 if(flag){
     controls = new THREE.DeviceOrientationControls(camera);
-    controls.screenOrientation=-1;
 }
 else{
     document.addEventListener( 'mousemove', onMouseMove, false );
@@ -164,7 +163,6 @@ setTimeout(()=>{funct()} ,2000);
 
         
         if(flag){
-            controls.screenOrientation=-1;
             controls.update();
         }
 
