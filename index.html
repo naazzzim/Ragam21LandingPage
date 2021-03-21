@@ -52,12 +52,12 @@
         //design for each side given below
         //Materials can be MeshLambertMaterial, MeshphongMaterial, MeshBasicMaterial, MeshBlinnMaterial
         let cubeMaterials=[
-                new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/1.jpeg'),side:THREE.BackSide}),//right side
-                new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/2.jpeg'),side:THREE.BackSide}),//left side
-                new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/3.jpeg'),side:THREE.BackSide}),//top side
-                new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/4.jpeg'),side:THREE.BackSide}),//bottom side
-                new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/5.jpeg'),side:THREE.BackSide}),//front side
-                new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/6.jpeg'),side:THREE.BackSide}),//back side
+                new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/right.jpeg'),side:THREE.BackSide}),//right side
+                new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/left.jpeg'),side:THREE.BackSide}),//left side
+                new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/top.jpeg'),side:THREE.BackSide}),//top side
+                new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/bottom.jpeg'),side:THREE.BackSide}),//bottom side
+                new THREE.MeshLambertMaterial({map: new THREE.TextureLoader().load('img/back.jpeg'),side:THREE.BackSide}),//front side
+                new THREE.MeshPhongMaterial({map: new THREE.TextureLoader().load('img/front.jpeg'),side:THREE.BackSide}),//back side
             ];
             //MeshBasicMaterial does not depend on lighting
             //MeshFaceMaterial used instead of mesh material
