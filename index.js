@@ -163,8 +163,10 @@ setTimeout(()=>{funct()} ,2000);
     var update1= ()=>{
 
         
-        if(flag)
+        if(flag){
+            controls.screenOrientation=-1;
             controls.update();
+        }
 
         else
         {
